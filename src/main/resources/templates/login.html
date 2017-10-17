@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/jquery-1.11.3.min.js" th:src="@{js/jquery-1.11.3.min.js}"></script>
+<script src="../static/js/validation.js" th:src="@{js/validation.js}"></script>
 </head>
 <body>
 	<form action="login_java" method="GET">
-		<input type="test" name="account" id="account"/>
-		<input type="test" name="pass" id="pass"/>
-		<button onclick="login()">登录</button>
+		<input type="test" name="account" id="account" placeholder="用户名"/>
+		<span style="color:red"  data-error="account"></span>
+		<br>
+		<input type="password" name="pass" id="pass" placeholder="密码"/>
+		<span style="color:red"  data-error="pass"></span>
+		<br>
+		<input type="button" name="submit" value="登录">
 		</form>
 </body>
 </html>
