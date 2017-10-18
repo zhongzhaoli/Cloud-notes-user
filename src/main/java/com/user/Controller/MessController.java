@@ -2,6 +2,7 @@ package com.user.Controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +23,21 @@ public class MessController {
 	User user=new User();
 	MD5 md5 = new MD5();
 	
+	@RequestMapping("/index")
+	public String index(HttpSession session){
+			return "index";
+	}
+	
 	@RequestMapping(value="/userlist",method=RequestMethod.GET)
 	public String userlist(HttpSession session,Model m){
 		if(session.getAttribute("user")!=null){
 			List<User> userlist = userdao.userlist();
+			String getuser=(String) session.getAttribute("user");
 			m.addAttribute("userlist",userlist);
-			return "userlist";
+			if(StringUtils.equals(getuser, "admin")){ //管理员账号
+				return "userlist";
+			}
+			return "redirect:/index";
 		}
 		return "login";
 	}

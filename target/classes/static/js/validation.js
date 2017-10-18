@@ -5,16 +5,9 @@ function post(url,type,data,form){
 		data:data,
 		success:function(e){
 			error_init();
-			if(e==="success"){
+			if(e === "success"){
 				location.href="/userlist";
 				return;
-			}
-			if(e==="hasno_account"){
-				$("[data-error='account']").html("没有此账号");
-				return;
-			}
-			if(e==="password_is_error"){
-				$("[data-error='pass']").html("密码错误");
 			}
             var json = $.parseJSON(e);
             $.each(json, function (idx, obj) {

@@ -38,6 +38,12 @@ public class UserController {
 	public String login(){
 		return "login";
 	}
+	
+	@RequestMapping("/test")
+	public String test(){
+		return "test";
+	}
+	
 	@RequestMapping("/register")
 	public String register(){
 		return "register";
@@ -54,8 +60,8 @@ public class UserController {
 	@RequestMapping(value="/login_java",method=RequestMethod.GET)
 	public String login(HttpSession session,@Valid Userform userForm, BindingResult result){
 		List<JsonResult> arr = new ArrayList<JsonResult>();
+		List<ObjectError> list = result.getAllErrors();//getAllErrors获取所有错误的类型放进List里
 		if(result.hasErrors()){
-			List<ObjectError> list = result.getAllErrors();//getAllErrors获取所有错误的类型放进List里
 			for(ObjectError error : list){
 				JsonResult jr=new JsonResult();
 				FieldError fe = (FieldError)error;
@@ -67,12 +73,22 @@ public class UserController {
 		else{
 			User user = userdao.findByAccount(userForm.getAccount());
 			if(user==null){
-				return "hasno_account";
+				JsonResult jr=new JsonResult();
+				jr.setField("account");
+				jr.setMessage("没有此用户");
+				arr.add(jr);
 			}
 			else{
 				String result1=userdao.auth(userForm.getAccount(), md5.setmd5(userForm.getPass()));
 				if(StringUtils.equals(result1,"success")){
 					session.setAttribute("user",userForm.getAccount());
+				}
+				if(StringUtils.equals(result1, "password_is_error")){
+					JsonResult jr=new JsonResult();
+					jr.setField("pass");
+					jr.setMessage("密码错误");
+					arr.add(jr);
+					return JSON.toJSONString(arr);
 				}
 				return result1;
 			}
