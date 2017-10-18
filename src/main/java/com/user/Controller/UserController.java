@@ -22,8 +22,8 @@ import com.alibaba.fastjson.JSON;
 import com.user.Dao.UserDao;
 import com.user.Entity.User;
 import com.user.Util.MD5;
-import com.user.form.JsonResult;
-import com.user.form.Userform;
+import com.user.Form.JsonResult;
+import com.user.Form.Userform;
 
 @Controller //定义一个控制器
 public class UserController {
@@ -48,7 +48,11 @@ public class UserController {
 	public String register(){
 		return "register";
 	}
-	@RequestMapping(value="/register_java",method=RequestMethod.POST)
+	
+	
+	
+	//注册
+	@RequestMapping(value="/user",method=RequestMethod.POST)
 	public String register(String account,String pass){
 		user.setAccount(account);
 		user.setId(UUID.randomUUID().toString().replace("-", ""));
@@ -56,8 +60,9 @@ public class UserController {
 		userdao.save(user);
 		return "redirect:/login";
 	}
+	//登录
 	@ResponseBody //返回的是字符串不是网页
-	@RequestMapping(value="/login_java",method=RequestMethod.GET)
+	@RequestMapping(value="/user",method=RequestMethod.GET)
 	public String login(HttpSession session,@Valid Userform userForm, BindingResult result){
 		List<JsonResult> arr = new ArrayList<JsonResult>();
 		List<ObjectError> list = result.getAllErrors();//getAllErrors获取所有错误的类型放进List里
@@ -95,7 +100,15 @@ public class UserController {
 		}
 		return JSON.toJSONString(arr);
 	}
-	@RequestMapping(value="/delete_user",method=RequestMethod.DELETE)
+	//退出
+	@ResponseBody //返回的是字符串不是网页
+	@RequestMapping(value="/outlogin",method=RequestMethod.GET)
+	public String outlogin(HttpSession session){
+		session.removeAttribute("user");
+		return "login";
+	}
+	//删除
+	@RequestMapping(value="/user",method=RequestMethod.DELETE)
 	public String del_user(String userid){
 		User user=userdao.findId(userid);
 		userdao.del_user(user);

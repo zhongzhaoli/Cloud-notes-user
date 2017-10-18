@@ -25,7 +25,12 @@ public class MessController {
 	
 	@RequestMapping("/index")
 	public String index(HttpSession session){
+		if(session.getAttribute("user")!=null){
 			return "index";
+		}
+		else{
+			return "login";
+		}
 	}
 	
 	@RequestMapping(value="/userlist",method=RequestMethod.GET)

@@ -1,14 +1,14 @@
-package com.user.form;
+package com.user.Form;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Userform {
-	@Size(min=3,message="不少于3个字符")
 	@NotNull(message="不能为空")
+	@Size(min=3,message="不少于3个字符")
 	private String account;
-	@Size(min=3,message="不少于3个字符")
 	@NotNull(message="不能为空")
+	@Size(min=3,message="不少于3个字符")
 	private String pass;
 	public String getAccount() {
 		return account;

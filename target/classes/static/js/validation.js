@@ -6,7 +6,7 @@ function post(url,type,data,form){
 		success:function(e){
 			error_init();
 			if(e === "success"){
-				location.href="/userlist";
+				location.href="/index";
 				return;
 			}
             var json = $.parseJSON(e);
@@ -43,3 +43,15 @@ $(document).on("click", "[name='submit']", function(e) {
     $('form').find('#password_error').html("");
     post(url,type,data,form);
 });
+function outlogin(){
+	$.ajax({
+		url:"outlogin",
+		type:"post",
+		data:{"_method":"GET"},
+		success:function(e){
+			if(e){
+				location.href="/login";
+			}
+		}
+	})
+}

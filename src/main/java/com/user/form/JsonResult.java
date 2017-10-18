@@ -1,4 +1,4 @@
-package com.user.form;
+package com.user.Form;
 
 public class JsonResult {
 	private String field;

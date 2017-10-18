@@ -16,7 +16,7 @@
 	function deleteu(k){
 		var user_id=$(k).parent().find('#user_id')[0].innerHTML;
 		$.ajax({
-			 url: '/delete_user',
+			 url: '/user',
 			 type: 'POST',
 			 data:{userid:user_id,_method:'DELETE'},
 			 success: function(response) {
