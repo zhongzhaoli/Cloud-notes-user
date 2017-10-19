@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-@EnableDiscoveryClient
-@RestController
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController

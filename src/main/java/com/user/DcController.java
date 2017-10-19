@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DcController {
     @Autowired
-    DiscoveryClient discoveryClient;
+    public DiscoveryClient discoveryClient;
 
     @GetMapping("/dc")
     public String dc() {
