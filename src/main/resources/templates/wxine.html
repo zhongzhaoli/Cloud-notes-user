@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="Access-Control-Allow-Origin" content="http://www.baidu.com:80">
+<script src="../static/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+</head>
+<body>
+	<form action="http://10.1.65.33:81/login" method="POST">
+		<input id="account" name="account" type="text" value="testtest">
+		<input id="password" name="password" type="text" value="123456">
+ 		<input type="button" name="sumbit" value="登录" onclick="sumbits(this)">
+<!-- 		<button>登录</button> -->
+	</form>
+</body>
+</html>
+<script>
+ function sumbits(z){
+	var url=$(z).parent().attr("action");
+	var account=$(z).parent().find('#account')[0].value;
+	var password=$(z).parent().find('#password')[0].value
+	$.ajax({
+		url:url,
+		type:"post",
+		data:{
+			"account":account,
+			"password":password
+		},
+        dataType: 'json', 
+		success:function(e){
+			alert(e);
+		}
+	})
+} 
+window.onload=function(){
+	var invocation = new XMLHttpRequest();
+	var url = 'http://10.1.65.33:81/login';
+	   
+	function callOtherDomain() {
+	  if(invocation) {    
+	    invocation.open('POST', url, true);
+	    invocation.onreadystatechange = handler;
+	    invocation.send(); 
+	  }
+	}
+}
+</script>

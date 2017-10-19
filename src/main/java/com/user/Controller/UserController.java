@@ -13,5 +13,11 @@ public class UserController {
 	public String login(){
 		return "login";
 	}
+	
+	//第三方登录，
+	@RequestMapping("/wxine")
+	public String wxine(){
+		return "wxine";
+	}
 }
 	
