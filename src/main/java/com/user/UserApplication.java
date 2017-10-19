@@ -12,6 +12,8 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @SpringBootApplication
+@EnableDiscoveryClient
+@RestController
 public class UserApplication {
 	
 	public static void main(String[] args) {
