@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../static/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script src="../static/js/Eamil.js" th:src="@{/js/Eamil.js}"></script>
+</head>
+<body>
+	注册
+	<form action="/user" method="POST">
+		<input type="text" name="account" placeholder="account">
+		<br>
+		<input type="text" name="pass" placeholder="pass">
+		<br>
+		<input type="text" name="pass2" placeholder="pass2">
+		<br>
+		<input type="button" value="注册">
+	</form>
+	
+	登录
+	<form action="/user" method="GET">
+		<input type="text" name="account" placeholder="account">
+		<br>
+		<input type="text" name="pass" placeholder="pass">
+		<br>
+		<input type="button" value="登录">
+	</form>
+</body>
+</html>
