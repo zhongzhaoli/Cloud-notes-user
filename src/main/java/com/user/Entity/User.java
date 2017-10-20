@@ -3,7 +3,7 @@ package com.user.Entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+@Entity  //表明该类是ejb的实体bean
 public class User {
 	//账号
 	@Id
