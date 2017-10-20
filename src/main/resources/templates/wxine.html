@@ -30,20 +30,8 @@
 		},
         dataType: 'json', 
 		success:function(e){
-			alert(e);
+			alert(e.msg);
 		}
 	})
 } 
-window.onload=function(){
-	var invocation = new XMLHttpRequest();
-	var url = 'http://10.1.65.33:81/login';
-	   
-	function callOtherDomain() {
-	  if(invocation) {    
-	    invocation.open('POST', url, true);
-	    invocation.onreadystatechange = handler;
-	    invocation.send(); 
-	  }
-	}
-}
 </script>
