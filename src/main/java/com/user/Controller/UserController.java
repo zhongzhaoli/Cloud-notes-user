@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,13 +18,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.user.Dao.UserDao;
 import com.user.Entity.User;
+import com.user.Util.MD5;
 import com.user.Util.ServiceException;
 
 @Controller
 public class UserController {
 	
+	@Autowired 
+	private UserDao userdao;
+	
 	User user=new User();
+	MD5 md5 = new MD5();
 	
 	//登录页面
 	@RequestMapping("/login")
@@ -47,6 +54,7 @@ public class UserController {
 	@ResponseBody //返回的是字符串不是网页
 	@RequestMapping(value="/user",method=RequestMethod.POST)
 	public String register_in(@Valid RegisterForm RegisterForm, BindingResult result){
+		//验证 位数
 		if(result.hasErrors()){
 			List<JsonResult> arr = new ArrayList<JsonResult>();
 			List<ObjectError> list = result.getAllErrors();//getAllErrors获取所有错误的类型放进List里
@@ -59,13 +67,22 @@ public class UserController {
 			}
 			return JSON.toJSONString(arr);
 		}
-		user.setId(UUID.randomUUID().toString().replace("-", ""));
-		user.setUsername(RegisterForm.getAccount());
-		user.setPassword(RegisterForm.getPassword());
+		//验证 二次密码
 		if(!StringUtils.equals(RegisterForm.getPassword2(),RegisterForm.getPassword())){
 			throw new ServiceException("password2","pass2.error");
 		}
-		return "login";
+		//验证 用户是否存在
+		User has=userdao.findByAccount(RegisterForm.getAccount());
+		System.out.println(has);
+		if(null!=has){
+			throw new ServiceException("account","account.has.error");
+		}
+		user.setId(UUID.randomUUID().toString().replace("-", ""));
+		user.setAccount(RegisterForm.getAccount());
+		user.setPassword(md5.setmd5(RegisterForm.getPassword()));
+		userdao.save(user);
+		
+		return "success";
 	}
 }
 	

@@ -19,6 +19,13 @@ $(document).ready(function(){
 		dat._method=type;
 		return dat;
 	}
+	function error_init(){
+		if($("[data-error='password2']")){
+			$("[data-error='password2']").html("");
+		}
+		$("[data-error='account']").html("");
+		$("[data-error='password']").html("");
+	}
 	
 	$("[name='submit']").on("click",function(){
 		var form = $(this).parent();
@@ -30,12 +37,13 @@ $(document).ready(function(){
 			data:data,
 			type:type,
 			success:function(e){
-				if($("[data-error='password2']")){
-					$("[data-error='password2']").html("");
+				error_init();
+				if(e === "success"){
+					alert("注册成功");
+					location.href="/login";
+					return;
 				}
-				$("[data-error='account']").html("");
-				$("[data-error='password']").html("");
-				if(typeof(e)==="string"){
+				if(typeof(e)==="string"&&e!="success"){
 					var json = $.parseJSON(e);
 		            $.each(json, function (idx, obj) {
 		                var name = "[data-error='" + obj.field + "']";
@@ -50,5 +58,8 @@ $(document).ready(function(){
 				}
 			}
 		})
+	})
+	$("input").on("keydown",function(){
+		error_init();
 	})
 });
