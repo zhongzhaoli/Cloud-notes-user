@@ -11,8 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Component;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
+//import org.hibernate.Session;
+//import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.springframework.stereotype.Repository;
 
@@ -46,19 +46,5 @@ public class UserDao {
 			 return (User) list.get(0);
 		 }
 		 return null;
-	}
-
-	//注入实体管理器
-	@PersistenceContext
-	private EntityManager entityManager;
-	
-	//获取数据库连接对象
-	public Session getSession(){
-		return entityManager.unwrap(Session.class);
-	}
-	
-	public User findByAccount(String account){
-		User user = getSession().get(User.class, account);
-		return user;
 	}
 }

@@ -98,11 +98,11 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/login")
 	public String login_check(UserForm userForm){
-		User user = new User();
-		@SuppressWarnings("unused")
-		User users = userDao.findByAccount("sbdl");
-		System.out.println(users);
-		return "wxine";
+		User user = userdao.findByAccount(userForm.getAccount());
+		if(user != null){
+			
+		}
+		return "success";
 	}
 }
 	
