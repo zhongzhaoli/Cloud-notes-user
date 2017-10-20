@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,16 +20,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.user.Dao.UserDao;
 import com.user.Entity.User;
 import com.user.Util.ServiceException;
 
 @Controller
 public class UserController {
 	
+	@Autowired
+	UserDao userDao;
+	
 	User user=new User();
 	
 	//登录页面
-	@RequestMapping("/login")
+	@GetMapping("/login")
 	public String login(){
 		return "login";
 	}
@@ -61,7 +67,7 @@ public class UserController {
 			return JSON.toJSONString(arr);
 		}
 		user.setId(UUID.randomUUID().toString().replace("-", ""));
-		user.setUsername(RegisterForm.getAccount());
+		user.setAccount(RegisterForm.getAccount());
 		user.setPassword(RegisterForm.getPassword());
 		if(!StringUtils.equals(RegisterForm.getPassword2(),RegisterForm.getPassword())){
 			throw new ServiceException("password2","pass2.error");
@@ -77,10 +83,14 @@ public class UserController {
 	 * @param confirm
 	 * @return
 	 */
+	@ResponseBody
 	@PostMapping("/login")
-	public String login_check(){
-		
-		return null;
+	public String login_check(UserForm userForm){
+		User user = new User();
+		@SuppressWarnings("unused")
+		User users = userDao.findByAccount("sbdl");
+		System.out.println(users);
+		return "wxine";
 	}
 }
 	

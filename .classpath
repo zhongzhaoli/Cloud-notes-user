@@ -36,5 +36,14 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="G:/jike/repository/com/alibaba/fastjson/1.2.20/fastjson-1.2.20.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="com.alibaba"/>
+			<attribute name="maven.artifactId" value="fastjson"/>
+			<attribute name="maven.version" value="1.2.20"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

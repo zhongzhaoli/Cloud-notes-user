@@ -1,12 +1,14 @@
 package com.user.Entity;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class User {
-	@Id
 	//账号
+	@Id
 	private String id;
-	private String username;
+	private String account;
 	private String password;
 	//个人信息
 	private String nickname;
@@ -24,11 +26,11 @@ public class User {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getAccount() {
+		return account;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 	public String getPassword() {
 		return password;

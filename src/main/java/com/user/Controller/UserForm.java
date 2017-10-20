@@ -5,10 +5,8 @@ import javax.validation.constraints.Size;
 
 public class UserForm {
 	@NotNull(message="不能为空")
-	@Size(min=3,message="不少于3个字符")
 	private String account;
 	@NotNull(message="不能为空")
-	@Size(min=3,message="不少于3个字符")
 	private String password;
 	public String getAccount() {
 		return account;

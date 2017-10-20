@@ -1,20 +1,33 @@
 package com.user.Dao;
 
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
-import com.netflix.config.Property;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.stereotype.Component;
+
 import com.user.Entity.User;
 
-import net.bytebuddy.agent.builder.AgentBuilder.RawMatcher.Disjunction;
 
+//组件
+@Component
+//事务管理器
+@Transactional
 public class UserDao {
-	public User findByAccount(String username){
-		try {
-			DetachedCriteria dc = DetachedCriteria.forClass(User.class);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+
+	//注入实体管理器
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	//获取数据库连接对象
+	public Session getSession(){
+		return entityManager.unwrap(Session.class);
+	}
+	
+	public User findByAccount(String account){
+		User user = getSession().get(User.class, account);
+		return user;
 	}
 }
