@@ -3,6 +3,7 @@ package com.user.Controller;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,6 +33,20 @@ public class UserController {
 	@RequestMapping(value="/user",method=RequestMethod.POST)
 	public String register_in(@Valid UserForm userForm){
 		return "login";
+	}
+	
+	/**
+	 * 登陆
+	 * 
+	 * @param id
+	 * @param tid
+	 * @param confirm
+	 * @return
+	 */
+	@PostMapping("/login")
+	public String login_check(){
+		
+		return null;
 	}
 }
 	

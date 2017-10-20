@@ -9,7 +9,7 @@ public class UserForm {
 	private String account;
 	@NotNull(message="不能为空")
 	@Size(min=3,message="不少于3个字符")
-	private String pass;
+	private String password;
 	public String getAccount() {
 		return account;
 	}
@@ -17,9 +17,9 @@ public class UserForm {
 		this.account = account;
 	}
 	public String getPass() {
-		return pass;
+		return password;
 	}
 	public void setPass(String pass) {
-		this.pass = pass;
+		this.password = pass;
 	}
 }
