@@ -1,5 +1,6 @@
 package com.user.Controller;
 
+import java.rmi.server.ServerCloneException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.user.Dao.UserDao;
 import com.user.Entity.User;
+import com.user.Service.UserService;
 import com.user.Util.MD5;
 import com.user.Util.ServiceException;
 
@@ -33,6 +35,7 @@ public class UserController {
 	
 	User user=new User();
 	MD5 md5 = new MD5();
+	UserService userService = new UserService();
 	
 	//登录页面
 	@GetMapping("/login")
@@ -90,20 +93,22 @@ public class UserController {
 	/**
 	 * 登陆
 	 * 
-	 * @param id
-	 * @param tid
-	 * @param confirm
-	 * @return
 	 */
 	@ResponseBody
 	@PostMapping("/login")
-	public String login_check(@Valid UserForm userForm){
-		System.out.println(userForm.getPassword());
+	public String login_check(UserForm userForm, UserService userService){
 		User user = userdao.findByAccount(userForm.getAccount());
 		if(user != null){
-			
+			if(userForm.getPassword().equals(null))
+				throw new ServiceException("password","password.has.empty");
+		}else{
+			throw new ServiceException("account","account.has.not.exists");	
 		}
-		return "success";
+		if(userService.login(userForm.getAccount(), userForm.getPassword())){
+			return "success";			
+		}else{
+			throw new ServiceException("password","password.has.not.error");
+		}
 	}
 }
 	
