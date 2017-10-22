@@ -97,7 +97,8 @@ public class UserController {
 	 */
 	@ResponseBody
 	@PostMapping("/login")
-	public String login_check(UserForm userForm){
+	public String login_check(@Valid UserForm userForm){
+		System.out.println(userForm.getPassword());
 		User user = userdao.findByAccount(userForm.getAccount());
 		if(user != null){
 			

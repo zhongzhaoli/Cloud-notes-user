@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	//form 实例化后的内容
-	function string_deal(data,type){
-		if(type=="post"){
+	function string_deal(data,url,type){
+		if(url=="http://127.0.0.1:8084/login"){
 			var dat={"account":"","password":"","password2":"","_method":""};
 		}
-		if(type=="get"){
+		if(url=="http://127.0.0.1:8084/login"){
 			var dat={"account":"","password":"","_method":""};
 		}
 		var q=data.split("&");
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		var form = $(this).parent();
 		var type = form[0].method;
 		var url = form[0].action;
-		var data = string_deal(form.serialize(),type);
+		var data = string_deal(form.serialize(),url,type);
 		$.ajax({
 			url:url,
 			data:data,
@@ -39,8 +39,7 @@ $(document).ready(function(){
 			success:function(e){
 				error_init();
 				if(e === "success"){
-					alert("注册成功");
-					location.href="/login";
+					succ_an();
 					return;
 				}
 				if(typeof(e)==="string"&&e!="success"){
