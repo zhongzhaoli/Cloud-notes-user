@@ -17,7 +17,7 @@ public class UserForm {
 	public String getPassword() {
 		return password;
 	}
-	public void setPass(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 }

@@ -10,8 +10,10 @@
 	登录
 	<form action="/login" method="POST">
 		<input type="text" name="account" placeholder="account">
+		<span style="color:red" data-error="account"></span>
 		<br>
 		<input type="text" name="password" placeholder="password">
+		<span style="color:red" data-error="password"></span>
 		<br>
 		<input type="button" value="登录" name="submit">
 	</form>
