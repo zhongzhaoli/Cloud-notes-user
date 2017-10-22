@@ -1,37 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta http-equiv="Access-Control-Allow-Origin" content="*">
-<meta http-equiv="Access-Control-Allow-Origin" content="http://www.baidu.com:80">
-<script src="../static/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+  <meta charset="UTF-8">
+  <title>Calm breeze login screen</title>
+  
+  
+  	  <script src="../static/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+      <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+  
 </head>
+
 <body>
-	<form action="http://10.1.65.33:81/login" method="POST">
-		<input id="account" name="account" type="text" value="testtest">
-		<input id="password" name="password" type="text" value="123456">
- 		<input type="button" name="sumbit" value="登录" onclick="sumbits(this)">
-<!-- 		<button>登录</button> -->
-	</form>
+  <div class="wrapper">
+	<div class="container">
+		<h1 id="head_banner_h1">网信</h1>
+		
+		<form class="form" action="http://10.1.65.33:81/login" method="POST">
+			<div>
+				<input type="text" name="account" placeholder="用户名">
+				<div style="color:red" data-error="account"></div>
+				<input type="password" name="password" placeholder="密码">
+				<div style="color:red" data-error="password"></div>
+			</div>
+			<button type="button" name="submit" id="login-button">登录</button>
+		</form>
+	</div>	
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+    <script  src="../static/js/index.js" th:src="@{/js/login.js}"></script>
+    <script>
+		$("[name='submit']").on("click",function(){
+			var form=$(this).parent();
+			var url=form[0].action;
+			var account=form.find("[name='account']")[0].value;
+			var password=form.find("[name='password']")[0].value;
+			$.ajax({
+				type:"POST",
+				url:url,
+				data:{
+					"account":account,
+					"password":password
+				},
+				success:function(e){
+					if(e.msg!="登陆成功"){
+						$("[data-error='password']")[0].innerHTML="账号密码错误";
+					}
+					else{
+						succ_an();
+					}
+				}
+			})
+		});
+    </script>
 </body>
 </html>
-<script>
- function sumbits(z){
-	var url=$(z).parent().attr("action");
-	var account=$(z).parent().find('#account')[0].value;
-	var password=$(z).parent().find('#password')[0].value
-	$.ajax({
-		url:url,
-		type:"post",
-		data:{
-			"account":account,
-			"password":password
-		},
-        dataType: 'json', 
-		success:function(e){
-			alert(e.msg);
-		}
-	})
-} 
-</script>
