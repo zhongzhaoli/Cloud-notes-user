@@ -107,7 +107,7 @@ public class UserController {
 		if(userService.login(userForm.getAccount(), userForm.getPassword())){
 			return "success";			
 		}else{
-			throw new ServiceException("password","password.has.not.error");	
+			throw new ServiceException("password","password.has.not.error");
 		}
 	}
 }
