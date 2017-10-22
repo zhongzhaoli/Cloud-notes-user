@@ -41,13 +41,13 @@ public class UserController {
 	}
 	
 	//注册页面
-	@RequestMapping("/register")
+	@GetMapping("/register")
 	public String register(){
 		return "register";
 	}
 	
 	//第三方登录，
-	@RequestMapping("/wxine")
+	@GetMapping("/wxine")
 	public String wxine(){
 		return "wxine";
 	}
