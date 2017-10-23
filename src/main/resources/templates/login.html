@@ -6,7 +6,8 @@
   
   
   	  <script src="../static/js/jquery-1.11.3.min.js" th:src="@{/js/jquery-1.11.3.min.js}"></script>
-      <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	  <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	  <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
 
   
 </head>
@@ -16,7 +17,7 @@
 	<div class="container">
 		<h1 id="head_banner_h1">登录</h1>
 		
-		<form class="form" action="/login" method="POST">
+		<form class="form animated fadeInUp" action="/login" method="POST">
 			<div>
 			<input type="text" name="account" placeholder="用户名">
 			<div style="color:red" data-error="account"></div>
@@ -24,6 +25,10 @@
 			<div style="color:red" data-error="password"></div>
 			</div>
 			<button type="button" name="submit" id="login-button">登录</button>
+			<div class="third">
+				<span>还没账号，点击<a href="/register">注册</a></span>
+				<a href="/wxine.html">第三方登录</a>
+			</div>
 		</form>
 	</div>	
 	

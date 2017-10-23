@@ -262,3 +262,12 @@ margin-left: 5px;
             transform: translateY(-1200px) rotate(600deg);
   }
 }
+.third{
+  width: 250px;
+  margin: 0 auto 10px auto;
+  padding: 10px 0px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
