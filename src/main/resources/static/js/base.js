@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	//form 实例化后的内容
 	function string_deal(data,url,type){
-		if(url=="http://127.0.0.1:8084/login"){
+		if(url=="http://localhost:8084/login"){
 			var dat={"account":"","password":"","password2":"","_method":""};
 		}
-		if(url=="http://127.0.0.1:8084/login"){
+		if(url=="http://localhost:8084/login"){
 			var dat={"account":"","password":"","_method":""};
 		}
 		var q=data.split("&");
