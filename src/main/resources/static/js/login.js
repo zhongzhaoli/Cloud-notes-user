@@ -6,9 +6,9 @@ function succ_an(){
 	}
 	else {
 		$('.wrapper_register').addClass('form-success');
-		$("#head_banner_h1")[0].innerHTML="成功";
+		$("#head_banner_h1")[0].innerHTML="欢迎";
 		setTimeout(function(){
 			location.href="/login";
-		},1500)
+		},2000)
 	}
 };

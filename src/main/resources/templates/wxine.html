@@ -55,15 +55,37 @@
 					"password":password
 				},
 				success:function(e){
-					if(e.msg!="登陆成功"){
+					if(e.msg!="登录成功"){
 						$("[data-error='password']")[0].innerHTML="账号密码错误";
 					}
 					else{
-						succ_an();
+						$.ajax({
+							url:"/wxine",
+							data:{"account":account,"password":password},
+							type:"post",
+							success:function(e){
+								if(e=="success"){
+									succ_an();
+								}
+								else{
+									$("[data-error='password']")[0].innerHTML="系统出错";
+								}
+							}
+						})
 					}
 				}
 			})
 		});
+		$("input").on("keydown",function(){
+			error_init();
+		})
+		function error_init(){
+			if($("[data-error='password2']")){
+				$("[data-error='password2']").html("");
+			}
+			$("[data-error='account']").html("");
+			$("[data-error='password']").html("");
+		}
     </script>
 </body>
 </html>

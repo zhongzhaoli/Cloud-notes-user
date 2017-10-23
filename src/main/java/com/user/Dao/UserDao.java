@@ -37,9 +37,10 @@ public class UserDao {
 		getSession().save(user);
 	}
 	//检测是否存在这个用户
-	public User findByAccount(String account){
+	public User findByAccount(String account,String wxine){
 		 DetachedCriteria dc=DetachedCriteria.forClass(User.class); //离线查询
 		 dc.add(Property.forName("account").eq(account));
+		 dc.add(Property.forName("wxine").eq(wxine));
 		 Criteria criteria=dc.getExecutableCriteria(getSession());
 		 List list=criteria.list();
 		 if(list!=null&&list.size()>0){
