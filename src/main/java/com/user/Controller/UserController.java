@@ -32,10 +32,12 @@ public class UserController {
 	
 	@Autowired 
 	private UserDao userdao;
+
+	@Autowired 
+	private UserService userservice;
 	
 	User user=new User();
 	MD5 md5 = new MD5();
-	UserService userService = new UserService();
 	
 	//登录页面
 	@GetMapping("/login")
@@ -96,7 +98,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@PostMapping("/login")
-	public String login_check(UserForm userForm, UserService userService){
+	public String login_check(UserForm userForm){
 		User user = userdao.findByAccount(userForm.getAccount());
 		if(user != null){
 			if(userForm.getPassword().equals(null))
@@ -104,10 +106,10 @@ public class UserController {
 		}else{
 			throw new ServiceException("account","account.has.not.exists");	
 		}
-		if(userService.login(userForm.getAccount(), userForm.getPassword())){
-			return "success";			
+		if(userservice.login(userForm.getAccount(), userForm.getPassword())){
+			return "success";
 		}else{
-			throw new ServiceException("password","password.has.not.error");
+			throw new ServiceException("password","password.has.error");
 		}
 	}
 }
