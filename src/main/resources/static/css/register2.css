@@ -1,0 +1,84 @@
+@font-face {
+	font-family: logo_font;
+	src:url("../font/logo_font.ttf");
+}
+body,html{
+    background:#f7fafc;
+}
+.logo{
+    font-size:70px;
+    font-family:"Microsoft Yahei";
+    text-align:center;
+    color:#0f88eb;
+}
+.nav_table{
+    font-size:18px;
+    text-align:center;
+    list-style:none;
+}
+.nav_table > li {
+    width:80px;
+    text-align:center;
+    display:inline-block;
+}
+.nav_table > li >a{
+    color:rgb(85, 85, 85);
+    padding-bottom:5px;
+}
+.nav_table > li >a:hover{
+    color:black;
+    text-decoration:none;
+}
+.mood{
+    text-align:center;
+    font-family:"Microsoft Yahei";
+    color: #555;
+    font-size: 18px;
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+form{
+    margin-top:30px;
+}
+.active{
+    color:#0f88eb !important;
+    border-bottom:2px #0f88eb solid;
+}
+
+form > div{
+    border: 1px #e0e0e0 solid;
+    position: relative;
+    /* top:30px; */
+    padding:0;
+    border-radius: 5px;
+}
+.form > form > div > input{
+    border:0px;
+    width:100%;
+    height:50px;
+    border-bottom: 1px #e0e0e0 solid;
+    outline:none;
+    text-indent:10px;
+    font-family:"Microsoft Yahei";
+    font-size:15px;
+    color:silver;
+    border-radius: 5px 5px 0 0;
+}
+.form > form > div > input:nth-child(2){
+    border:0;
+    border-radius: 5px;
+}
+.btn_add_back{
+    background:#0f88eb;
+    border:0;
+    /* margin-top:20px; */
+    height:40px;
+    font-size:16px;
+    /* position: relative; */
+    /* top: 50px; */
+    width: 100%;
+    margin-top: 30px;
+}
+.btn_add_back:hover{
+    background:#55abed;
+}
