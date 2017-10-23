@@ -18,8 +18,15 @@ public class User {
 	//城市
 	private String city;
 	private String mood;
+	//是否是第三方登录
+	private String wxine;
 	
-	
+	public String getWxine() {
+		return wxine;
+	}
+	public void setWxine(String wxine) {
+		this.wxine = wxine;
+	}
 	public String getId() {
 		return id;
 	}

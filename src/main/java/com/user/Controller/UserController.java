@@ -79,7 +79,7 @@ public class UserController {
 			throw new ServiceException("password2","pass2.error");
 		}
 		//验证 用户是否存在
-		User has=userdao.findByAccount(RegisterForm.getAccount());
+		User has=userdao.findByAccount(RegisterForm.getAccount(),"false");
 		System.out.println(has);
 		if(null!=has){
 			throw new ServiceException("account","account.has.error");
@@ -87,19 +87,36 @@ public class UserController {
 		user.setId(UUID.randomUUID().toString().replace("-", ""));
 		user.setAccount(RegisterForm.getAccount());
 		user.setPassword(md5.setmd5(RegisterForm.getPassword()));
+		user.setWxine("false");
 		userdao.save(user);
 		
 		return "success";
 	}
 	
-	/**
-	 * 登陆
-	 * 
-	 */
+	//第三方登录完的注册
+	@ResponseBody
+	@RequestMapping(value="/wxine",method=RequestMethod.POST)
+	public String wxine_in(HttpSession session,String account,String password){
+		//验证 用户是否存在
+		User has=userdao.findByAccount(account,"true");
+		if(has==null){
+			user.setId(UUID.randomUUID().toString().replace("-", ""));
+			user.setAccount(account);
+			user.setPassword(md5.setmd5(password));
+			user.setWxine("true");
+			userdao.save(user);
+		}
+		
+		userservice.set_session(session,account);
+		
+		return "success";
+	}
+	
+	//登录
 	@ResponseBody
 	@PostMapping("/login")
-	public String login_check(UserForm userForm){
-		User user = userdao.findByAccount(userForm.getAccount());
+	public String login_check(HttpSession session,UserForm userForm){
+		User user = userdao.findByAccount(userForm.getAccount(),"false");
 		if(user != null){
 			if(userForm.getPassword().equals(null))
 				throw new ServiceException("password","password.has.empty");
@@ -107,6 +124,7 @@ public class UserController {
 			throw new ServiceException("account","account.has.not.exists");	
 		}
 		if(userservice.login(userForm.getAccount(), userForm.getPassword())){
+			userservice.set_session(session, userForm.getAccount());
 			return "success";
 		}else{
 			throw new ServiceException("password","password.has.error");

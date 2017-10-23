@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	//form 实例化后的内容
 	function string_deal(data,url,type){
-		if(url=="http://localhost:8084/login"){
+		if(url=="user"){
 			var dat={"account":"","password":"","password2":"","_method":""};
 		}
-		if(url=="http://localhost:8084/login"){
+		if(url=="login"){
 			var dat={"account":"","password":"","_method":""};
 		}
 		var q=data.split("&");
@@ -31,7 +31,8 @@ $(document).ready(function(){
 		var form = $(this).parent();
 		var type = form[0].method;
 		var url = form[0].action;
-		var data = string_deal(form.serialize(),url,type);
+		var url_d = url.split("8084/")[1];
+		var data = string_deal(form.serialize(),url_d,type);
 		$.ajax({
 			url:url,
 			data:data,
