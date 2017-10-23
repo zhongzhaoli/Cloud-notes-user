@@ -61,5 +61,17 @@ $(document).ready(function(){
 	})
 	$("input").on("keydown",function(){
 		error_init();
+	});
+	$(".head_banner span").on("click", function(e){
+		$(".head_banner span").removeClass("active");
+		if($(this).text() === "登录"){
+			$(".login_form").show();
+			$(".register_form").hide();
+			$(this).addClass("active");
+		}else{
+			$(".login_form").hide();
+			$(".register_form").show();
+			$(this).addClass("active");
+		}
 	})
 });

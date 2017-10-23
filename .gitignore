@@ -23,3 +23,6 @@ dist/
 nbdist/
 .nb-gradle/
 /bin/
+.classpath
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/com.user/Cloud-notes-user/pom.properties

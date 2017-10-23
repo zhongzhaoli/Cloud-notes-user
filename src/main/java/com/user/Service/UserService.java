@@ -28,7 +28,7 @@ public class UserService {
 		if(new_pass.equals(user.getPassword())){
 			return true;
 		}else{
-			throw new ServiceException("password","password.has.error");	
+			throw new ServiceException("password","password.has.error");
 		}
 	}
 	//删除session
