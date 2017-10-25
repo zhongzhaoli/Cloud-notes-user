@@ -23,12 +23,13 @@ public class GlobalAdvice {
 	private static final Logger LOGGER = LoggerFactory.getLogger(GlobalAdvice.class);
 
 	@Autowired
-	private MessageSource messageSource;
+	private MessageSource messageSource; //提供了消息处理的功能
 	
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public String notFoundView() {
+	@ResponseStatus(HttpStatus.NOT_FOUND) //修饰目标方法
+	public String notFoundView() { //没有找到错误
 		return "error";
 	}
+	//转字符串
 	@ResponseBody
 	@ExceptionHandler(ServiceException.class)
 	@ResponseStatus(HttpStatus.OK)
