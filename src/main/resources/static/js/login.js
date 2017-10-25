@@ -6,14 +6,14 @@ function succ_an(){
 		$('.wrapper').addClass('form-success');
 		$("#head_banner_h1")[0].innerHTML="欢迎";
 		setTimeout(function(){
-			location.href="http://10.50.102.117:8085/index";
-		},2500)
+			location.href="http://10.50.102.135:8085/index";
+		},1500)
 	}
 	else {
 		$('.wrapper_register').addClass('form-success');
 		$("#head_banner_h1")[0].innerHTML="成功";
 		setTimeout(function(){
 			location.href="/login";
-		},2500)
+		},1500)
 	}
 };
