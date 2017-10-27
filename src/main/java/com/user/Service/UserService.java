@@ -31,13 +31,4 @@ public class UserService {
 			return false;
 		}
 	}
-	//删除session
-	public void del_session(HttpSession session,String session_name){
-		session.removeAttribute(session_name);
-	}
-	//设置 session
-	public void set_session(HttpSession session,String account){
-		del_session(session,"user");
-		session.setAttribute("user",account);
-	}
 }
