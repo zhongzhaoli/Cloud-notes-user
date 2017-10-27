@@ -88,6 +88,7 @@ public class UserController {
 		user.setId(UUID.randomUUID().toString().replace("-", ""));
 		user.setAccount(RegisterForm.getAccount());
 		user.setPassword(md5.setmd5(RegisterForm.getPassword()));
+		user.setPhoto("/images/upload/user.jpg");
 		user.setWxine("false");
 		userdao.save(user);
 		
