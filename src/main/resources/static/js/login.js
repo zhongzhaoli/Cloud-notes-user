@@ -6,7 +6,7 @@ function succ_an(){
 		$('.wrapper').addClass('form-success');
 		$("#head_banner_h1")[0].innerHTML="欢迎";
 		setTimeout(function(){
-			location.href="http://10.50.102.135:8085/index";
+			location.href="http://127.0.0.1:8085/index";
 		},1500)
 	}
 	else {

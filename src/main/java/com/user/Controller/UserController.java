@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -87,6 +88,7 @@ public class UserController {
 		user.setId(UUID.randomUUID().toString().replace("-", ""));
 		user.setAccount(RegisterForm.getAccount());
 		user.setPassword(md5.setmd5(RegisterForm.getPassword()));
+		user.setPhoto("/photo/user.jpg");
 		user.setWxine("false");
 		userdao.save(user);
 		
@@ -96,7 +98,7 @@ public class UserController {
 	//第三方登录完的注册
 	@ResponseBody
 	@RequestMapping(value="/wxine",method=RequestMethod.POST)
-	public String wxine_in(HttpSession session,String account,String password){
+	public String wxine_in(HttpServletRequest req,String account,String password,User user){
 		//验证 用户是否存在
 		User has=userdao.findByAccount(account,"true");
 		if(has==null){
@@ -107,7 +109,7 @@ public class UserController {
 			userdao.save(user);
 		}
 		
-		userservice.set_session(session,account);
+		req.getSession().setAttribute("user_name", account);
 		
 		return "success";
 	}
@@ -115,7 +117,7 @@ public class UserController {
 	//登录
 	@ResponseBody
 	@PostMapping("/login")
-	public String login_check(HttpSession session,UserForm userForm){
+	public String login_check(HttpServletRequest req,UserForm userForm,User users){
 		User user = userdao.findByAccount(userForm.getAccount(),"false");
 		if(user != null){
 			if(userForm.getPassword().equals(null))
@@ -124,7 +126,9 @@ public class UserController {
 			throw new ServiceException("account","account.has.not.exists");	
 		}
 		if(userservice.login(userForm.getAccount(), userForm.getPassword())){
-			userservice.set_session(session, userForm.getAccount());
+			req.getSession().setAttribute("user_name",userForm.getAccount());
+			User list_user = userdao.findByAccount(userForm.getAccount(), "false");
+			req.getSession().setAttribute("user_id", list_user.getId());
 			return "success";
 		}else{
 			throw new ServiceException("password","password.has.error");
