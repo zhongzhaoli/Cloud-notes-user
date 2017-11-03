@@ -5,8 +5,9 @@ function succ_an(){
 	if ($('.wrapper')[0]) {
 		$('.wrapper').addClass('form-success');
 		$("#head_banner_h1")[0].innerHTML="欢迎";
+		var ip = location.origin.split("http://")[1].split(":8084")[0];
 		setTimeout(function(){
-			location.href="http://127.0.0.1:8085/index";
+			location.href="http://"+ip+":8085/index";
 		},1500)
 	}
 	else {
