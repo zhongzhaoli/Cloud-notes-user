@@ -110,6 +110,7 @@ public class UserController {
 		}
 		
 		req.getSession().setAttribute("user_name", account);
+		req.getSession().setAttribute("user_id", has.getId());
 		
 		return "success";
 	}
