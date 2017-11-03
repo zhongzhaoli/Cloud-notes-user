@@ -60,14 +60,14 @@ public class UserController {
 	
 	//注册
 	@ResponseBody //返回的是字符串不是网页
-	@RequestMapping(value="/user",method=RequestMethod.POST)
+	@RequestMapping(value = "/user",method = RequestMethod.POST)
 	public String register_in(@Valid RegisterForm RegisterForm, BindingResult result){
 		//验证 位数
 		if(result.hasErrors()){
 			List<JsonResult> arr = new ArrayList<JsonResult>();
 			List<ObjectError> list = result.getAllErrors();//getAllErrors获取所有错误的类型放进List里
 			for(ObjectError error : list){
-				JsonResult jr=new JsonResult();
+				JsonResult jr = new JsonResult();
 				FieldError fe = (FieldError)error;
 				jr.setField(fe.getField());
 				jr.setMessage(fe.getDefaultMessage());
@@ -80,9 +80,9 @@ public class UserController {
 			throw new ServiceException("password2","pass2.error");
 		}
 		//验证 用户是否存在
-		User has=userdao.findByAccount(RegisterForm.getAccount(),"false");
+		User has = userdao.findByAccount(RegisterForm.getAccount(),"");
 		System.out.println(has);
-		if(null!=has){
+		if(null != has){
 			throw new ServiceException("account","account.has.error");
 		}
 		user.setId(UUID.randomUUID().toString().replace("-", ""));
@@ -97,21 +97,25 @@ public class UserController {
 	
 	//第三方登录完的注册
 	@ResponseBody
-	@RequestMapping(value="/wxine",method=RequestMethod.POST)
+	@RequestMapping(value = "/wxine",method = RequestMethod.POST)
 	public String wxine_in(HttpServletRequest req,String account,String password,User user){
 		//验证 用户是否存在
 		User has=userdao.findByAccount(account,"true");
-		if(has==null){
-			user.setId(UUID.randomUUID().toString().replace("-", ""));
+		if(has == null){
+			String se_id = UUID.randomUUID().toString().replace("-", "");
+			user.setId(se_id);
 			user.setAccount(account);
 			user.setPassword(md5.setmd5(password));
+			user.setPhoto("/photo/user.jpg");
 			user.setWxine("true");
 			userdao.save(user);
+			req.getSession().setAttribute("user_name", account);
+			req.getSession().setAttribute("user_id", se_id);
 		}
-		
-		req.getSession().setAttribute("user_name", account);
-		req.getSession().setAttribute("user_id", has.getId());
-		
+		else{
+			req.getSession().setAttribute("user_name", account);
+			req.getSession().setAttribute("user_id", has.getId());
+		}
 		return "success";
 	}
 	

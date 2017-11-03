@@ -7,7 +7,6 @@ function succ_an(){
 		$("#head_banner_h1")[0].innerHTML="欢迎";
 		setTimeout(function(){
 			var url = window.location.host.split(":")[0];
-//			location.href="http://127.0.0.1:8085/index";
 			location.href="http://"+url+":8085/index";
 		},1500)
 	}
