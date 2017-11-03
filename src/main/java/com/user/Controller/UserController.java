@@ -80,7 +80,7 @@ public class UserController {
 			throw new ServiceException("password2","pass2.error");
 		}
 		//验证 用户是否存在
-		User has = userdao.findByAccount(RegisterForm.getAccount(),"false");
+		User has = userdao.findByAccount(RegisterForm.getAccount(),"");
 		System.out.println(has);
 		if(null != has){
 			throw new ServiceException("account","account.has.error");
@@ -102,17 +102,20 @@ public class UserController {
 		//验证 用户是否存在
 		User has=userdao.findByAccount(account,"true");
 		if(has == null){
-			user.setId(UUID.randomUUID().toString().replace("-", ""));
+			String se_id = UUID.randomUUID().toString().replace("-", "");
+			user.setId(se_id);
 			user.setAccount(account);
 			user.setPassword(md5.setmd5(password));
 			user.setPhoto("/photo/user.jpg");
 			user.setWxine("true");
 			userdao.save(user);
+			req.getSession().setAttribute("user_name", account);
+			req.getSession().setAttribute("user_id", se_id);
 		}
-		
-		req.getSession().setAttribute("user_name", account);
-		req.getSession().setAttribute("user_id", user.getId());
-		
+		else{
+			req.getSession().setAttribute("user_name", account);
+			req.getSession().setAttribute("user_id", has.getId());
+		}
 		return "success";
 	}
 	

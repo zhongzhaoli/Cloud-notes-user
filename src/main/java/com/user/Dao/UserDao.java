@@ -40,7 +40,9 @@ public class UserDao {
 	public User findByAccount(String account,String wxine){
 		 DetachedCriteria dc=DetachedCriteria.forClass(User.class); //离线查询
 		 dc.add(Property.forName("account").eq(account));
-		 dc.add(Property.forName("wxine").eq(wxine));
+		 if(wxine!=""&&wxine!=null){
+			 dc.add(Property.forName("wxine").eq(wxine));
+		 }
 		 Criteria criteria=dc.getExecutableCriteria(getSession());
 		 List list=criteria.list();
 		 if(list!=null&&list.size()>0){
