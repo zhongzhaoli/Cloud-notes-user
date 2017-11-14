@@ -41,6 +41,12 @@ public class UserController {
 	MD5 md5 = new MD5();
 	
 	//登录页面
+	@GetMapping("/")
+	public String logins(){
+		return "login";
+	}
+	
+	//登录页面
 	@GetMapping("/login")
 	public String login(){
 		return "login";
